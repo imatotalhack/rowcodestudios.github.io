@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Row Code Studios — Boutique iOS App Development</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0b0f1a;
+            --surface: #131825;
+            --border: #1e2636;
+            --text: #e2e8f0;
+            --muted: #8892a8;
+            --accent: #4f8cff;
+            --accent-glow: rgba(79, 140, 255, 0.15);
+            --green: #34d399;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 15, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(79, 140, 255, 0.25);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 .accent { color: var(--accent); }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.75rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(79, 140, 255, 0.3);
+        }
+
+        .btn-primary:hover { box-shadow: 0 6px 32px rgba(79, 140, 255, 0.45); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover { border-color: var(--muted); }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        section > p {
+            color: var(--muted);
+            max-width: 600px;
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        /* App Card */
+        .app-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .app-card:hover { border-color: var(--accent); }
+
+        .app-icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #c93545, #e25565);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.75rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 24px rgba(201, 53, 69, 0.25);
+        }
+
+        .app-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-info p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.75rem;
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            color: var(--green);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        /* Values */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+        }
+
+        .value-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section p {
+            color: var(--muted);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .email-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .email-link:hover { border-color: var(--accent); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .app-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav { padding: 1rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo"><span>{</span> Row Code Studios <span>}</span></div>
+    <a href="#contact">Get in Touch</a>
+</nav>
+
+<div class="hero">
+    <div class="badge">Coming Soon — New App Launch</div>
+    <h1>Boutique iOS apps, <span class="accent">crafted with care.</span></h1>
+    <p>Row Code Studios is a small, focused studio building polished iOS experiences. Quality over quantity — every app we ship is something we'd want to use ourselves.</p>
+    <div class="cta-group">
+        <a href="#apps" class="btn btn-primary">See What We're Building</a>
+        <a href="#about" class="btn btn-outline">About Us</a>
+    </div>
+</div>
+
+<section id="apps">
+    <div class="section-label">Apps</div>
+    <h2>What we're working on</h2>
+    <p>Our debut app makes organizing your holiday gift exchange effortless.</p>
+
+    <div class="app-card">
+        <div class="app-icon">🎅</div>
+        <div class="app-info">
+            <h3>Secret Santa</h3>
+            <p>Create a group, invite your friends and family, build wishlists, and let the app handle the pairings. Anonymous messaging, wishlist sharing, and a dead-simple setup — so you can focus on finding the perfect gift.</p>
+            <span class="tag">Launching Soon</span>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="section-label">About</div>
+    <h2>Why Row Code Studios</h2>
+    <p>We believe great apps come from small teams that sweat the details.</p>
+
+    <div class="values-grid">
+        <div class="value-card">
+            <div class="icon">📐</div>
+            <h3>Design-First</h3>
+            <p>Every screen is considered. We build native SwiftUI interfaces that feel right at home on iOS.</p>
+        </div>
+        <div class="value-card">
+            <div class="icon">🔒</div>
+            <h3>Privacy by Default</h3>
+            <p>We collect only what's necessary. Your data stays yours — no selling, no tracking, no surprises.</p>
+        </div>
+        <div class="value-card">
+            <div class="icon">⚡</div>
+            <h3>Ship & Iterate</h3>
+            <p>We launch lean and listen to real feedback. Every update is driven by what users actually need.</p>
+        </div>
+    </div>
+</section>
+
+<div class="contact-section" id="contact">
+    <div class="section-label">Contact</div>
+    <h2>Let's talk</h2>
+    <p>Have a question, partnership idea, or just want to say hello? Drop us a line.</p>
+    <a href="mailto:hello@rowcodestudios.com" class="email-link">hello@rowcodestudios.com</a>
+</div>
+
+<footer>
+    &copy; 2026 Row Code Studios. All rights reserved.
+</footer>
+
+</body>
+</html>
